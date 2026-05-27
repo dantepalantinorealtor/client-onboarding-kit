@@ -5,7 +5,7 @@
 /* ---------- CONFIG ---------- */
 
 // Replace with your Google Apps Script Web App URL (see README — "Submission setup").
-const ENDPOINT_URL = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
+const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbw20a2Ce8RXA1072k_eIfhBWMujqAZnaYc5-kyK6MrlzIk-NW6zaHGCSodfF5w7CTEN/exec';
 
 const STORAGE_KEY = 'palantino_intake_v1';
 
