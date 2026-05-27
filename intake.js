@@ -739,23 +739,25 @@ async function submitForm() {
     return;
   }
 
-  try {
-    await fetch(ENDPOINT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
-      body: JSON.stringify(payload),
-    });
-    // no-cors → can't read response, but request was sent
-    state.submitting = false;
-    state.submitted = true;
-    saveState();
-    renderSuccess();
-  } catch (e) {
-    state.submitting = false;
-    state.submitError = 'Something went wrong sending the form. Please try again, or email the Palantino Team directly.';
-    renderReview();
-  }
+   try {
+     const formData = new FormData();
+     formData.append('payload', JSON.stringify(payload));
+   
+     await fetch(ENDPOINT_URL, {
+       method: 'POST',
+       mode: 'no-cors',
+       body: formData,
+     });
+   
+     state.submitting = false;
+     state.submitted = true;
+     saveState();
+     renderSuccess();
+   } catch (e) {
+     state.submitting = false;
+     state.submitError = 'Something went wrong. Please try again or email the Palantino Team directly.';
+     renderReview();
+   }
 }
 
 /* ---------- MAIN RENDER ---------- */
