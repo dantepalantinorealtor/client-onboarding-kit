@@ -201,6 +201,13 @@ const STEP_LABELS = {
   seller: ['About You', 'The Property', 'The Story', 'Condition', 'Pricing', 'Logistics', 'Review'],
 };
 
+/* ---------- CHOOSER CARD ICONS ---------- */
+// Inline SVG line icons (matches the outlined-icon style used elsewhere on the site).
+
+const ICON_BUYER = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19 L19 9 L30 19" /><path d="M11 17 V37 H27 V17" /><path d="M17 37 V28 H21 V37" /><circle cx="33" cy="32" r="6.5" /><line x1="37.6" y1="36.6" x2="42" y2="41" /></svg>';
+
+const ICON_SELLER = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="11" width="24" height="14" rx="1" /><line x1="21" y1="25" x2="21" y2="39" /><line x1="13" y1="39" x2="29" y2="39" /></svg>';
+
 /* ---------- STATE ---------- */
 
 const initialState = {
@@ -412,7 +419,7 @@ function renderChooser() {
 
       <div class="chooser-grid">
         <button class="chooser-card" data-type="buyer">
-          <span class="chooser-card-glyph">§</span>
+          <span class="chooser-card-glyph">${ICON_BUYER}</span>
           <div class="chooser-card-label">For Buyers</div>
           <div class="chooser-card-title">I'm looking<br/>to buy</div>
           <p class="chooser-card-desc">Tell me about your timeline, budget, and what you're looking for in a home. About 5 minutes.</p>
@@ -420,7 +427,7 @@ function renderChooser() {
         </button>
 
         <button class="chooser-card" data-type="seller">
-          <span class="chooser-card-glyph">¶</span>
+          <span class="chooser-card-glyph">${ICON_SELLER}</span>
           <div class="chooser-card-label">For Sellers</div>
           <div class="chooser-card-title">I'm looking<br/>to sell</div>
           <p class="chooser-card-desc">Tell me about your property, your timeline, and your expectations. About 5 minutes.</p>
@@ -742,13 +749,13 @@ async function submitForm() {
    try {
      const formData = new FormData();
      formData.append('payload', JSON.stringify(payload));
-   
+
      await fetch(ENDPOINT_URL, {
        method: 'POST',
        mode: 'no-cors',
        body: formData,
      });
-   
+
      state.submitting = false;
      state.submitted = true;
      saveState();
